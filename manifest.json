@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Powered by Pages",
+  "version": "0.1.0",
+  "description": "A Chrome extension to detect if the current web site is powered by GitHub Pages",
+  "permissions": ["webRequest", "http://*/*"],
+  "page_action": {
+    "default_title": "Powered by Pages",
+    "default_icon": {
+      "19": "img/icon19.png",
+      "38": "img/icon38.png"
+    }
+  },
+  "background" : {
+    "scripts": ["dist/script.js"],
+    "persistent": true
+  }
+}
