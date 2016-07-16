@@ -1,21 +1,10 @@
 {
-  "name": "powered-by-pages-chrome-extension",
+  "name": "pages-toggle",
   "version": "0.1.0",
-  "description": "A Chrome extension to detect if the current web site is powered by GitHub Pages",
+  "description": "A Chrome extension to toggle between GitHub Pages site and source",
   "main": "dist/script.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/benbalter/powered-by-pages-chrome-extension.git"
-  },
   "author": "Ben Balter",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/benbalter/powered-by-pages-chrome-extension/issues"
-  },
-  "homepage": "https://github.com/benbalter/powered-by-pages-chrome-extension#readme",
   "devDependencies": {
     "coffee-script": "^1.10.0",
     "grunt": "^0.4.5",

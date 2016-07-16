@@ -12,8 +12,11 @@
     options = ["responseHeaders"];
 
     function PoweredByPages() {
+      this.onClick = bind(this.onClick, this);
+      this.redirect = bind(this.redirect, this);
       this.callback = bind(this.callback, this);
       chrome.webRequest.onHeadersReceived.addListener(this.callback, filter, options);
+      chrome.pageAction.onClicked.addListener(this.onClick);
     }
 
     PoweredByPages.prototype.isGitHubHeader = function(header) {
@@ -36,6 +39,42 @@
         return;
       }
       return chrome.pageAction.show(details.tabId);
+    };
+
+    PoweredByPages.prototype.redirect = function(tabId, newUrl) {
+      return chrome.tabs.update(tabId, {
+        url: newUrl
+      });
+    };
+
+    PoweredByPages.prototype.onClick = function(tab) {
+      var host, owner, parts, path, repo, url;
+      url = new URL(tab.url);
+      host = url.hostname;
+      path = url.pathname;
+      if (host === "github.com") {
+        parts = path.split("/");
+        owner = parts[1];
+        repo = parts[2];
+        url = "http://" + owner + ".github.io";
+        if (repo.match(/^#{owner}\.github\.(io|com)$/i)) {
+          return this.redirect(tab.id, url);
+        } else {
+          return this.redirect(tab.id, url + "/" + repo);
+        }
+      } else if (host.match(/[a-z0-9-]+\.github\.(io|com)$/i)) {
+        parts = host.split(".");
+        owner = parts[0];
+        if (parts[2] === "com") {
+          owner = "github";
+          repo = parts[0] + ".github.com";
+        } else if (path === "/") {
+          repo = owner + ".github.io";
+        } else {
+          repo = path.split("/")[1];
+        }
+        return this.redirect(tab.id, "https://github.com/" + owner + "/" + repo);
+      }
     };
 
     return PoweredByPages;
