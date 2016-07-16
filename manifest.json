@@ -1,11 +1,11 @@
 {
   "manifest_version": 2,
-  "name": "Powered by Pages",
+  "name": "Pages Toggle",
   "version": "0.1.0",
-  "description": "A Chrome extension to detect if the current web site is powered by GitHub Pages",
-  "permissions": ["webRequest", "http://*/*"],
+  "description": "A Chrome extension to toggle between GitHub Pages site and source",
+  "permissions": ["webRequest", "http://*/*", "https://*/*", "tabs"],
   "page_action": {
-    "default_title": "Powered by Pages",
+    "default_title": "Pages Toggle",
     "default_icon": {
       "19": "img/icon19.png",
       "38": "img/icon38.png"
